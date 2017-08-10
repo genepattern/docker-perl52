@@ -24,7 +24,7 @@
 
             }
         ],
-        "image": "genepattern/perl52",
+        "image": "genepattern/docker-perl52",
         "memory": 2000,
         "mountPoints": [],
         "ulimits": [],
