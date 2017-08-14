@@ -10,9 +10,10 @@ EXECUTABLE=$5
 #
 # assign filenames for STDOUT and STDERR if not already set
 #
-: ${STDOUT_FILENAME=.gp_metadata/stdout.txt}
-: ${STDERR_FILENAME=.gp_metadata/stderr.txt}
-: ${EXITCODE_FILENAME=.gp_metadata/exit_code.txt}
+: ${GP_METADATA_DIR=$WORKING_DIR/.gp_metadata}
+: ${STDOUT_FILENAME=stdout.txt}
+: ${STDERR_FILENAME=stderr.txt}
+: ${EXITCODE_FILENAME=$GP_METADATA_DIR/exit_code.txt}
 
 # echo out params
 echo working dir is  -$WORKING_DIR- 
@@ -20,6 +21,7 @@ echo Task dir is -$TASKLIB-
 echo executable is -$5-
 echo S3_ROOT is -$S3_ROOT-
 echo input files location  is -$INPUT_FILES_DIR-
+echo STDOUT is $STDOUT_FILENAME
 
 cd $WORKING_DIR
 
@@ -30,7 +32,8 @@ shift
 shift
 
 echo "========== DEBUG inside container ================="
-echo $@
+echo $@  >$STDOUT_FILENAME 2>$STDERR_FILENAME
+echo "{ \"exit_code\": $? }">$EXITCODE_FILENAME
 echo "====== END DEBUG ================="
 
 "$@"  >$STDOUT_FILENAME 2>$STDERR_FILENAME
