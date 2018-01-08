@@ -1,3 +1,4 @@
+# copyright 2017-2018 Regents of the University of California and the Broad Institute. All rights reserved.
 FROM perl:5.20
 
 COPY common/container_scripts/runS3OnBatch.sh /usr/local/bin/runS3OnBatch.sh
