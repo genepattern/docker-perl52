@@ -9,6 +9,9 @@ RUN apk add --update bash perl python3 python3-dev && \
     pip3 install awscli && \
     chmod ugo+x /usr/local/bin/*.sh
     
- 
-CMD ["/usr/local/bin/runS3OnBatch.sh" ]
+RUN addgroup -S genepattern && adduser -S genepattern -G genepattern
+
+    
+USER genepattern 
+
 
